@@ -11,7 +11,8 @@ This is a **Train Booking System** built using **Java**, **Spring Boot**, **MySQ
 - **Secure Admin Operations**: Admin endpoints are protected with a secure **API key** to prevent unauthorized access.  
 - **Secure Booking with JWT Tokens**: Users must pass the **JWT token** (received on login) to access booking endpoints.  
 - **Concurrency Handling**: Ensures no race conditions during seat booking.  
-- **Overlapping & Non-Overlapping Train Logic**: Efficiently handles overlapping or non-overlapping seat availability logic.  
+- **Overlapping & Non-Overlapping Train Logic**: Efficiently handles overlapping or non-overlapping seat availability logic.
+- **Exception Handling**: Comprehensive exception handling for invalid input, unauthorized access, resource not found, and other edge cases.
 
 ---
 
@@ -118,26 +119,25 @@ Below is a description of each API endpoint and example of usage:
 `GET /api/trains`  
 
 **Description:**  
- Fetches a list of all available trains in the system.
+ After adding JWT token you can fetch a list of all available trains in the system (if any trains are added).
 
-  ```json
-            GET /api/trains
-            Authorization: Bearer <jwt-token>
+  ```
+     GET /api/trains
+     Authorization: Bearer <jwt-token>
   ```
           
 ![Screenshot 2024-12-07 134800](https://github.com/user-attachments/assets/2c2d708e-d00b-41c0-92a8-87f5dadf2326)
 
 
-## 4 *Admin - Add Train** 
+## 4 Admin - Add Train
 **Endpoint:**  
 `POST /api/admin/addTrain`  
 
 **Description:**  
  Admin-only endpoint for adding a new train. Access requires a valid API key and JWT token.
    Authentication Required:
-  
-  JWT Token in Authorization -> Bearer Token.
-  API Key in header: `x-api-key: adityaadityaaditya.`
+     JWT Token in` Authorization -> Bearer Token.`
+     API Key in header: `x-api-key: adityaadityaaditya.`
 
   ```json
             {
@@ -173,13 +173,13 @@ Below is a description of each API endpoint and example of usage:
 
 ## 5 Admin - Delete All Trains and Routes 
 **Endpoint:**  
-`DELETE /api/admin/deleteTrain`  
+`GET /api/admin/deleteTrain`  
 
 **Description:**  
  Deletes all trains and routes from the database. Access requires a valid API key and JWT token.
 
-  ```json
-         DELETE /api/admin/deleteTrain
+  ```
+         GET /api/admin/deleteTrain
         Header: x-api-key: adityaadityaaditya
   ```
 
@@ -192,9 +192,11 @@ Below is a description of each API endpoint and example of usage:
   Authentication Required:
   JWT Token in `Authorization -> Bearer Token.`
 
-  ```json
+  ```
     POST /api/trains/1/book?src=1&dest=3
   ```
+![image](https://github.com/user-attachments/assets/90588657-8e63-42e5-bc28-89c69151d643)
+![image](https://github.com/user-attachments/assets/8a7a3c4b-1831-4fb2-9277-9d8b2e4d654b)
 ![Screenshot 2024-12-07 134314](https://github.com/user-attachments/assets/e610beec-3295-4596-b1f4-b7c30fde5e35)
 ![Screenshot 2024-12-07 134327](https://github.com/user-attachments/assets/3aad17a2-c948-4ae3-a5d7-e9f1e69a8789)
 
@@ -208,7 +210,7 @@ Below is a description of each API endpoint and example of usage:
   Authentication Required:
   JWT Token in `Authorization -> Bearer Token.`
 
-  ```json
+  ```
     POST /api/trains/1/bookByName?source=City A&destination=City C
   ```
 ![image](https://github.com/user-attachments/assets/9c74fccf-76eb-483f-a7c8-e876736d09d1)
@@ -222,7 +224,7 @@ Below is a description of each API endpoint and example of usage:
   Authentication Required:
   JWT Token in `Authorization -> Bearer Token.`
 
-  ```json
+  ```
     GET /api/trains/availability?source=StationA&destination=StationB
   ```
 ![image](https://github.com/user-attachments/assets/a0d49199-cdf0-41c8-8f25-45502713a2f2)
@@ -236,10 +238,25 @@ Below is a description of each API endpoint and example of usage:
   Authentication Required:
   JWT Token in `Authorization -> Bearer Token.`
 
-  ```json
+  ```
     GET /api/trains/showAllBookings
   ```
 ![Screenshot 2024-12-07 134927](https://github.com/user-attachments/assets/b70ae388-a802-4309-a718-0d165f6eca16)
+
+
+## 10  Check Bookings for Particular User
+**Endpoint:**  
+`GET /api/trains/showUserBooking`  
+
+**Description:**  
+ Allows users to check bookings for particular user.
+  Authentication Required:
+  JWT Token in `Authorization -> Bearer Token.`
+
+  ```
+    GET /api/trains/showUserBooking?username=Aditya
+  ```
+
 ![Screenshot 2024-12-07 135219](https://github.com/user-attachments/assets/f21cd0ea-1175-446d-8b21-32756be02ef6)
 
 

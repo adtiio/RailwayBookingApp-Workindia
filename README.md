@@ -51,7 +51,7 @@ Here is the description of the available APIs:
 ### Steps to Run the Project
 1. Clone the repository:  
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/adtiio/RailwayBookingApp-Workindia.git
 2. Set up the local port, admin.api.key and MySQL database and configure connection credentials in application.properties.
     ```properties
         server.port=8080
